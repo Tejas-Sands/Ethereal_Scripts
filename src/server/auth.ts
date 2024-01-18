@@ -4,10 +4,13 @@ import {
   type DefaultSession,
   type NextAuthOptions,
 } from "next-auth";
-// import DiscordProvider from "next-auth/providers/discord";
-
-import { env } from "~/env";
+import GoogleProvider from "next-auth/providers/google";
+import Credentials from "next-auth/providers/credentials";
+import bcrypt from "bcrypt"
 import { db } from "~/server/db";
+// import DiscordProvider from "next-auth/providers/discord";
+import { env } from "~/env";
+// import Email from "next-auth/providers/email";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -47,6 +50,52 @@ export const authOptions: NextAuthOptions = {
   },
   adapter: PrismaAdapter(db),
   providers: [
+          GoogleProvider({
+            clientId: process.env.GOOGLE_CLIENT_ID,
+            clientSecret: process.env.GOOGLE_SECRET
+          }),
+
+          Credentials({
+            name: "Credentials",
+            credentials: {
+              email: {
+                label: "email:",
+                type: "text",
+                placeholder: "your-email",
+              },
+              password: {
+                label: "password:",
+                type: "password",
+                placeholder: "your-password",
+              },
+            },
+            async authorize(credentials) {
+              try {
+                const foundUser = await db.user.findUnique({ where:{email: credentials?.email,}, });
+
+                if (foundUser) {
+                  console.log("User Exists");
+                  const match = await bcrypt.compare(
+                    credentials.password,
+                    foundUser.password
+                  );
+
+                  if (match) {
+                    console.log("Good Pass");
+                    delete foundUser.password;
+
+                    foundUser["role"] = "Unverified Email";
+                    return foundUser;
+                  }
+                }
+              } catch (error) {
+                console.log(error);
+              }
+              return null;
+            },
+          }),
+      ],
+      
     // DiscordProvider({
     //   clientId: env.DISCORD_CLIENT_ID,
     //   clientSecret: env.DISCORD_CLIENT_SECRET,
@@ -60,7 +109,6 @@ export const authOptions: NextAuthOptions = {
      *
      * @see https://next-auth.js.org/providers/github
      */
-  ],
 };
 
 /**
