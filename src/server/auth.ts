@@ -6,10 +6,11 @@ import {
 } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
-import bcrypt from "bcrypt"
+import { verify } from "argon2"
 import { db } from "~/server/db";
 // import DiscordProvider from "next-auth/providers/discord";
 import { env } from "~/env";
+import { Session } from "inspector";
 // import Email from "next-auth/providers/email";
 
 /**
@@ -21,7 +22,7 @@ import { env } from "~/env";
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
-      id: string;
+      email: string;
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];
@@ -39,14 +40,22 @@ declare module "next-auth" {
  * @see https://next-auth.js.org/configuration/options
  */
 export const authOptions: NextAuthOptions = {
+  // callbacks: {
+  //   session: ({ session, user }) => ({
+  //     ...session,
+  //     user: {
+  //       ...session.user,
+  //       email: user.email,
+  // //     },
+  //   }),
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    async jwt({token, user, session}){
+      return token;
+    },
+    async session({ session, token, user }) {
+      console.log("4session callback", {session, user, token})
+      return session; // The return type will match the one returned in `useSession()`
+    },
   },
   adapter: PrismaAdapter(db),
   providers: [
@@ -75,17 +84,20 @@ export const authOptions: NextAuthOptions = {
 
                 if (foundUser) {
                   console.log("User Exists");
-                  const match = await bcrypt.compare(
-                    credentials.password,
-                    foundUser.password
+                  const match = await verify(
+                    
+                    foundUser.password,credentials.password
                   );
 
                   if (match) {
                     console.log("Good Pass");
                     delete foundUser.password;
-
-                    foundUser["role"] = "Unverified Email";
+                    console.log(Session)
+                    // foundUser["role"] = "Unverified Email";
                     return foundUser;
+                  }
+                  else{
+                    console.log("incorrect password")
                   }
                 }
               } catch (error) {
@@ -95,6 +107,13 @@ export const authOptions: NextAuthOptions = {
             },
           }),
       ],
+      session: {
+        strategy: "jwt",
+      },
+      pages: {
+        signIn: '/Login',
+      },
+      secret: process.env.NEXTAUTH_SECRET,
       
     // DiscordProvider({
     //   clientId: env.DISCORD_CLIENT_ID,
@@ -117,3 +136,5 @@ export const authOptions: NextAuthOptions = {
  * @see https://next-auth.js.org/configuration/nextjs
  */
 export const getServerAuthSession = () => getServerSession(authOptions);
+
+// export { handler as GET, handler as POST };

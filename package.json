@@ -21,7 +21,10 @@
     "@trpc/next": "^10.43.6",
     "@trpc/react-query": "^10.45.0",
     "@trpc/server": "^10.45.0",
+    "argon2": "^0.31.2",
     "bcrypt": "^5.1.1",
+    "daisyui": "^4.6.0",
+    "fs": "^0.0.1-security",
     "next": "^14.0.4",
     "next-auth": "^4.24.5",
     "react": "18.2.0",
@@ -37,18 +40,23 @@
     "@types/react-dom": "^18.2.15",
     "@typescript-eslint/eslint-plugin": "^6.11.0",
     "@typescript-eslint/parser": "^6.11.0",
-    "autoprefixer": "^10.4.14",
+    "autoprefixer": "^10.4.17",
     "eslint": "^8.54.0",
     "eslint-config-next": "^14.0.4",
-    "postcss": "^8.4.31",
+    "postcss": "^8.4.33",
     "prettier": "^3.1.0",
     "prettier-plugin-tailwindcss": "^0.5.7",
     "prisma": "^5.6.0",
-    "tailwindcss": "^3.3.5",
+    "tailwindcss": "^3.4.1",
     "typescript": "^5.1.6"
   },
   "ct3aMetadata": {
     "initVersion": "7.25.1"
   },
-  "packageManager": "npm@10.2.4"
+  "packageManager": "npm@10.2.4",
+  "jest": {
+    "moduleNameMapper": {
+      "fs": "<rootDir>/__mocks__/fs.js"
+    }
+  }
 }

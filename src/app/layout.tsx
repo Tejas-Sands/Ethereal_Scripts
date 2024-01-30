@@ -1,11 +1,11 @@
-import "~/styles/globals.css";
+// import "~/styles/globals.css";
 
 import { Inter } from "next/font/google";
 import { cookies } from "next/headers";
 
 import { TRPCReactProvider } from "~/trpc/react";
-import { SessionProvider } from "next-auth/react";
-
+  import SessionP from "./_components/provider";
+  
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-sans",
@@ -24,12 +24,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+     <SessionP>
       <body className={`font-sans ${inter.variable}`}>
         <TRPCReactProvider cookies={cookies().toString()}>
           {children}
         </TRPCReactProvider>
-     
+    
       </body>
+      </SessionP>
     </html>
   );
 }
