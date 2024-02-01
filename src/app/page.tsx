@@ -61,6 +61,8 @@ const handleUser = async() => {
   // else{
   return (
   <div className="mb-8">
+    <h1 className="  text-45xl font-fantany text-center">Ethereal</h1>
+    <h2 className="text-zz -mt-40 font-fantany text-center">Scripts</h2>
       <h2 className="mb-4 text-2xl font-bold">gett 'em All</h2>
       <button className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" onClick={() =>fetchAllUsers.refetch()}> GET ALL USERS</button>
       <div className="text- mb-4 mt-4 grid grid-cols-3 gap-4 font-bold">
