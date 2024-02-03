@@ -16,9 +16,10 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import SignUp from "./_components/signUp";                                                   
 import LoginPage from "./Login/page";
 import Situation from "./_components/loginOrlogOut";
+import Nav from "./_components/Nav";
 // import Home from "./Home";
 
-export default function Nav(){
+export default function Home(){
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -60,8 +61,9 @@ const handleUser = async() => {
   }
   // else{
   return (
-  <div className="mb-8">
-    <h1 className="  text-45xl font-fantany text-center">Ethereal</h1>
+  <div className="mb-8 p-5">
+    <Nav/>
+    <h1 className="text-45xl font-fantany text-center ">Ethereal</h1>
     <h2 className="text-zz -mt-40 font-fantany text-center">Scripts</h2>
       <h2 className="mb-4 text-2xl font-bold">gett 'em All</h2>
       <button className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" onClick={() =>fetchAllUsers.refetch()}> GET ALL USERS</button>
@@ -113,7 +115,8 @@ const handleUser = async() => {
         <div>
         {/* {session ? (<Link href="/Login" className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-black">Login</Link>) : (<button onClick={() => void signOut()}>LogOut</button>)} */}
         {/* <button onClick={() => void signOut()}>LogOut</button> */}
-        <Situation/>
+        {/* <Situation/> */}
+    
         </div>
           </div>
         <SignUp/>
