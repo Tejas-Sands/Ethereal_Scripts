@@ -13,10 +13,12 @@
   import Someshhh from "./_components/someshit";
   import "../styles/globals.css"
 import { signIn, signOut, useSession } from "next-auth/react";
-import SignUp from "./_components/signUp";                                                   
-import LoginPage from "./Login/page";
-import Situation from "./_components/loginOrlogOut";
+import CreateBlogB from "./_components/toCreateB";
+// import SignUp from "./SignUp/signUp";                                                   
+import LoginPage from "./User/Login/page";
+// import Situation from "./_components/loginOrlogOut";
 import Nav from "./_components/Nav";
+import Ltext from "./_components/Maintext";
 // import Home from "./Home";
 
 export default function Home(){
@@ -33,7 +35,7 @@ export default function Home(){
 
   const createUserMutation = api.exam.createUsers.useMutation();
 
-  const {data:session, status} = useSession();
+  const {data:sessionData, status} = useSession();
   
   // console.log("here??")
 
@@ -45,6 +47,7 @@ const handleUser = async() => {
         name: name,
         email: email,
       }
+      
     );
     setName("");
     setEmail("");
@@ -63,8 +66,9 @@ const handleUser = async() => {
   return (
   <div className="mb-8 p-5">
     <Nav/>
-    <h1 className="text-45xl font-fantany text-center ">Ethereal</h1>
-    <h2 className="text-zz -mt-40 font-fantany text-center">Scripts</h2>
+    <Ltext/>
+    <br/>
+    
       <h2 className="mb-4 text-2xl font-bold">gett 'em All</h2>
       <button className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" onClick={() =>fetchAllUsers.refetch()}> GET ALL USERS</button>
       <div className="text- mb-4 mt-4 grid grid-cols-3 gap-4 font-bold">
@@ -111,6 +115,8 @@ const handleUser = async() => {
         <button className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-black"
         onClick={() => void signIn()}>
           SignIn</button>
+        
+        <CreateBlogB/>
         {/* <h2> User Login </h2> */}
         <div>
         {/* {session ? (<Link href="/Login" className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-black">Login</Link>) : (<button onClick={() => void signOut()}>LogOut</button>)} */}
@@ -119,7 +125,7 @@ const handleUser = async() => {
     
         </div>
           </div>
-        <SignUp/>
+   
       {/* <LoginPage/> */}
       </div>
     </div>

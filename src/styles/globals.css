@@ -1,7 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=MedievalSharp&display=swap');
 
+@config "../../tailwind.config.ts";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 /* Brush Script MT, Brush Script Std, cursive	 */

@@ -64,6 +64,7 @@ model User {
     accounts      Account[]
     sessions      Session[]
     posts         Post[]
+    blogs         Blog[]
 }
 
 model VerificationToken {
@@ -74,4 +75,17 @@ model VerificationToken {
     @@unique([identifier, token])
 }
 
+model Blog {
+    id          Int      @id @default(autoincrement())
+    Bname       String 
+    article     String
+    image       String?
+    imaget      String?
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt     
+    createdBy   User     @relation(fields: [createdById], references: [id])
+    createdById String
+
+    @@index([Bname])
+}
 

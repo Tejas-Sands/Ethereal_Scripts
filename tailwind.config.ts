@@ -4,7 +4,10 @@ import daisyui from "daisyui";
 // import {forms} from '@tailwindcss/forms'
 
 export default {
-  content: ["./src/**/*.tsx"],
+  content: [ "./src/**/*.{js,ts,jsx,tsx,mdx}",
+  "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  "./src/app/Login/*.{js,ts,jsx,tsx,mdx}",
+],
   theme: {
     fontSize: {
       sm: '0.8rem',

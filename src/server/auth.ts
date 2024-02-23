@@ -8,7 +8,6 @@ import GoogleProvider from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import { verify } from "argon2"
 import { db } from "~/server/db";
-// import DiscordProvider from "next-auth/providers/discord";
 import { env } from "~/env";
 import { Session } from "inspector";
 // import Email from "next-auth/providers/email";
@@ -22,7 +21,7 @@ import { Session } from "inspector";
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
-      email: string;
+      id: string;
       // ...other properties
       // role: UserRole;
     } & DefaultSession["user"];
@@ -48,15 +47,7 @@ export const authOptions: NextAuthOptions = {
   //       email: user.email,
   // //     },
   //   }),
-  callbacks: {
-    async jwt({token, user, session}){
-      return token;
-    },
-    async session({ session, token, user }) {
-      console.log("4session callback", {session, user, token})
-      return session; // The return type will match the one returned in `useSession()`
-    },
-  },
+  
   adapter: PrismaAdapter(db),
   providers: [
           GoogleProvider({
@@ -80,21 +71,20 @@ export const authOptions: NextAuthOptions = {
             },
             async authorize(credentials) {
               try {
-                const foundUser = await db.user.findUnique({ where:{email: credentials?.email,}, });
+                const user = await db.user.findUnique({ where:{email: credentials?.email,}, });
 
-                if (foundUser) {
+                if (user) {
                   console.log("User Exists");
                   const match = await verify(
-                    
-                    foundUser.password,credentials.password
+                    user.password,credentials.password
                   );
 
                   if (match) {
                     console.log("Good Pass");
-                    delete foundUser.password;
+                    delete user.password;
                     console.log(Session)
                     // foundUser["role"] = "Unverified Email";
-                    return foundUser;
+                    return user;
                   }
                   else{
                     console.log("incorrect password")
@@ -103,13 +93,44 @@ export const authOptions: NextAuthOptions = {
               } catch (error) {
                 console.log(error);
               }
-              return null;
+              return user;
             },
           }),
       ],
-      session: {
-        strategy: "jwt",
+      callbacks: {
+        async jwt({token, user, session}){
+          if (user) {
+            return {
+              ...token,
+            id: user.id
+            }
+          }
+          console.log(user)
+          return token;
+          
+        },
+        async session({ session, token, user }) {
+          console.log("session callback", {session, user, token})
+          return {
+            ...session,
+          user:{
+            ...session.user,
+            id: token.id,
+          }
+        };
+          return session; // The return type will match the one returned in `useSession()`
+        },
+        // session: ({ session, user }) => ({
+        //   ...session,
+        //   user: {
+        //     ...session.user,
+        //     id: user.id,
+        //   },
+        // }),
       },
+      session: 
+        {strategy: "jwt"},
+      
       pages: {
         signIn: '/Login',
       },
