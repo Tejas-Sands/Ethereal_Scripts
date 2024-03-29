@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useState } from "react"
 import { api } from "~/trpc/react";
-
+import "../../styles/globals.css"
 
 export default function CreateBlog(){
 

@@ -65,6 +65,7 @@ model User {
     sessions      Session[]
     posts         Post[]
     blogs         Blog[]
+    comments      Comments[]
 }
 
 model VerificationToken {
@@ -76,7 +77,7 @@ model VerificationToken {
 }
 
 model Blog {
-    id          Int      @id @default(autoincrement())
+    bid         Int      @id @default(autoincrement())
     Bname       String 
     article     String
     image       String?
@@ -85,7 +86,22 @@ model Blog {
     updatedAt   DateTime @updatedAt     
     createdBy   User     @relation(fields: [createdById], references: [id])
     createdById String
+    comments    Comments[]
 
     @@index([Bname])
+}
+
+model Comments {
+    cid         Int      @id @default(autoincrement())
+    name        String
+    content     String
+    image       String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt 
+    blogId      Blog     @relation(fields: [blid], references: [bid])
+    blid         Int
+    createdBy   User     @relation(fields: [createdById], references: [id])
+    createdById String
+
 }
 

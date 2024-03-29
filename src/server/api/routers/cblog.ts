@@ -42,8 +42,9 @@
 // });
 
 import {z} from "zod"
-import { createTRPCRouter, protectedProcedure } from "../trpc"
+import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc"
 import { blogSchema } from "~/mutual/blogInput/blog"
+import { db } from "~/server/db"
 
 // const sessionData = await getServerSession();
 export const makeBlog = createTRPCRouter({
@@ -65,9 +66,6 @@ export const makeBlog = createTRPCRouter({
         // data: blogSchema.parse(input),
        
         data: { Bname:input.Bname,
-                // article: article,
-                // image: img,
-                // image2: image,
                 article:input.article,
                 image:input.image,
                 imaget:input.image2,
@@ -78,9 +76,55 @@ export const makeBlog = createTRPCRouter({
       return {     
         message: `${result.title} created successfully`
     }
-  })   
+  }),
+    getAllBlog: publicProcedure.query(({ctx}) => {
+      return db.blog.findMany();
+  }),
+    getById: publicProcedure
+    .input(z.object({
+      bid: z.number(),
+    }))
+    .query(({ctx, input}) => {
+      return db.blog.findUnique({
+        where: {bid: input.bid},
+        include: {comments: true},
+    });
+    }),
+
+    commentit: protectedProcedure
+    .input(z.object({
+        image: z.string(),
+        name: z.string(),
+        content: z.string(),
+        createdBy: z.string(),
+        blogId: z.number(),
+    }))
+    .mutation(async ({ctx, input}) => {
+
+
+      const reep = ctx.session.user.id
+      console.log(reep)
+      await new Promise((resolve) => setTimeout(resolve, 3000));
+      // if (!ctx.session || !ctx.session.user) {
+      //   throw new Error('Unauthorized');
+      // }
+      const image = ctx.session.user.image || 'https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?q=80&w=1958&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+        const result = await ctx.db.comments.create({
+            data: { image: image ,
+                    name: ctx.session.user.name,
+                    content: input.content,
+                    createdBy: {connect: {id: ctx.session.user.id}} ,
+                    blogId: {connect:{bid: input.blogId}}
+            },
+            });
+            return {     
+              message: `${result.content} created successfully`
+          }
+    }),
+
+    
     })
-//             const {Bname , article , image, imaget, createdBy} = input;
+// //             const {Bname , article , image, imaget, createdBy} = input;
 //               // simulate a slow db call
 //               // await new Promise((resolve) => setTimeout(resolve, 1000));
         

@@ -6,6 +6,7 @@ import daisyui from "daisyui";
 export default {
   content: [ "./src/**/*.{js,ts,jsx,tsx,mdx}",
   "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  "./app/MainPage/**/*.{js,ts,jsx,tsx,mdx}",
   "./src/app/Login/*.{js,ts,jsx,tsx,mdx}",
 ],
   theme: {
