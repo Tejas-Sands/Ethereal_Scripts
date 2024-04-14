@@ -4,7 +4,8 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { FormEvent } from 'react';
 
-export default function Form() {
+export default function Form(){
+
   const router = useRouter();
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -22,7 +23,6 @@ export default function Form() {
     }
   };
   return (
-
     <form
       onSubmit={handleSubmit}
       className="flex flex-col gap-2 mx-auto max-w-md mt-10"

@@ -4,14 +4,12 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import { stringify } from "querystring";
+import { Button , Card ,  } from "@mui/material";
 
-// import { useParams } from "react-router-dom";
 export default function SingleBlog(props) {
-
-    // const {BlogId} = useParams();
-    // const blid = props.blogId.id;
+ 
     const {id} = props;
-    const {did} = useParams();
+    // const {did} = useParams();
     const router = useRouter();
     const [isLoading, setLoading] = useState(false);
     const [content, setContent] = useState("")
@@ -19,84 +17,50 @@ export default function SingleBlog(props) {
     const [image, setImage] = useState("");
     const [cid, setCid] = useState("");
     const [name,setName] = useState("");
-    // const [blogId, setBlogId] = useState("");
-
-    // const data = api.bcall.getAllBlog.useQuery();
-
-    // setBlogs(data.data);
-    // const blo = data.data
 
     const fetchIdBlog = api.bcall.getById.useQuery({bid : id})
     const CreateComment = api.bcall.commentit.useMutation();
 
     const handleCreate = async () => {
         try{
-            await CreateComment.mutateAsync({
-                image: image,
-                name : name,
-                content: content,
-                createdBy: cid,
-                blogId: parseInt(did),
-
-            });
-            setImage("");
-            setName("")
-            setContent("");
-            setCid("");
-            setBlogId("");
-            fetchIdBlog.refetch();
+                await CreateComment.mutateAsync({
+                    image: image,
+                    name : name,
+                    content: content,
+                    createdBy: cid,
+                    blogId: parseInt(id),
+                    });
+                setImage("");
+                setName("")
+                setContent("");
+                setCid("");
+                fetchIdBlog.refetch();
         }
         catch(error){
-            console.log(error);
+                console.log(error);
         }
     }
 
     return<>
-    {/* {props} */}
-    <div>
-        <h2>Comments</h2>
-        <div>
-            <input
-            placeholder="your comment...."
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            />
-        <button
-        onClick = {handleCreate}
-        >
-            comment
-        </button>
-        </div>
-    </div>
+            <div>
+                <h2>Comments</h2>
+                <div>
+                    <input
+                    placeholder="your comment...."
+                    value={content}
+                    onChange={(e) => setContent(e.target.value)}
+                    />
+                    <button
+                onClick = {handleCreate}
+                >
+                    comment
+                </button>
+                </div>
+                </div>
+            {JSON.stringify(fetchIdBlog.data)}
 
-    {JSON.stringify(fetchIdBlog.data)}
-    </>
+            </>
 }
-    // if(!blo){
-    //     return<>wedasfda</>
-    // }
-    // else{
-    //     const selectedData = blo.find((item) => item.bid === blid);
-    //     setBlogs(selectedData)
-    //     return <>
-    //     <div className="bg-zinc-950">
-    //         {/* {
-    //             selectedData &&
-    //             selectedData.data.map((blog) => ( */}
-    //                 <div
-    //                     // key={selectedData.bid}
-    //                     className="my-4 grid grid-cols-3 gap-4 rounded border border-gray-300 bg-white p-4 shadow"
-    //                 >
-    //                     <p>{JSON.stringify(selectedData)}</p>
-    //                     {/* <p>{selectedData.Bname}</p>
-    //                     <p>{selectedData.article}</p>
-    //                     <Link href={`AllBlogs/${blog.bid}`}>click</Link> */}
-    //                 </div>
-                    
-    //             {/* ))} */}
-    //     </div>
-    // </>;
-    // }
     
     
 
