@@ -9,6 +9,6 @@ export default async function LoginPage() {
     redirect('/');
   }
   return <>
-  <Form />;
+  <Form />
   </>
 }

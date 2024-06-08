@@ -2,6 +2,7 @@ import {z} from "zod"
 import { createTRPCRouter, protectedProcedure, publicProcedure } from "../trpc"
 import { blogSchema } from "~/mutual/blogInput/blog"
 import { db } from "~/server/db"
+// import { showError, showSuccess } from "~/mutual/validation/notifications"
 
 export const makeBlog = createTRPCRouter({
     blog: protectedProcedure
@@ -25,7 +26,10 @@ export const makeBlog = createTRPCRouter({
                 imaget:input.image2,
                 createdBy: {connect: {id: ctx.session.user.id}},
                 },
-        });  
+        }); 
+        // if (input.inputField === 'invalid') {
+          // showError("Invalid Input")
+        // } 
       return {     
         message: `${result.title} created successfully`
     }

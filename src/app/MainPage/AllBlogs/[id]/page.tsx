@@ -14,7 +14,7 @@ export default function() {
     let blid = parseInt(lid)
 
     return<>
-            {JSON.stringify(blid)}
+            {/* {JSON.stringify(blid)} */}
             <SingleBlog id = {blid}/>
          </>
 }

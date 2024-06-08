@@ -47,7 +47,7 @@ export default function Ltext(){
       setTimeout(() => {
         setIsLoading(false); // Reset loading state if needed
         router.push("/MainPage/AllBlogs")
-      }, 2500);
+      }, 1500);
       
     };
 
@@ -80,7 +80,7 @@ export default function Ltext(){
       containerStyle
     }> */}
       <div className="relative">
-  <img src={imgUrl} alt="Your Image" className="w-[68rem] h-[40rem] border-7 border-black"  ref={imgSiz} />
+  <img src={imgUrl} alt="Etherealism" className="w-[68rem] h-[42rem] border-7 border-black"  ref={imgSiz} />
   <div className="absolute inset-0 flex h-full flex-col items-center justify-center">
   <h1 className=" shrink text-45xl font-fantany text-center  text-slate-500 " style={{ textShadow: '5px 5px 8px black'}} ref={textRef}>Ethereal</h1>
   <br/>

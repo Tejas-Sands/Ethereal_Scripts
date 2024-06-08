@@ -3,12 +3,15 @@ import { hash } from "argon2";
 import { loginSchema, signUpSchema } from "~/mutual/validation/auth";
 import { createTRPCContext, createTRPCRouter, publicProcedure } from "../trpc";
 import { redirect } from "next/navigation";
+// import { showError } from "~/mutual/validation/notifications";
 
 export const serverRouter = createTRPCRouter({
     signUp : publicProcedure
     .input(signUpSchema)
     .mutation(async({ input , ctx}) => {
         const {name , email , password, image} = input;
+
+      
 
         const exists = await ctx.db.user.findUnique({
             where: {email},
