@@ -3,7 +3,6 @@ import { Button, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react"
 import { api } from "~/trpc/react";
-// import Err from "~/app/_components/notifications";
 import { showError } from "~/app/_components/Notifications";
 import TransitionAlerts from "~/app/_components/Alerts";
 import { authOptions } from "~/server/auth";
@@ -23,15 +22,12 @@ export default function SignUp(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [image, setImage] = useState("");
-    const [error, setError] = useState('');
+    const [typerror, setError] = useState('');
 
     const pushUser = api.auths.signUp.useMutation();
 
-    
-
     const handleUser = async() => {
-
-    
+      
         try{
 
           schema.parse( {
@@ -54,21 +50,11 @@ export default function SignUp(){
           setPassword("");
           setImage("");
 
-        // if(pushUser.error?.data?.zodError){
-        //   {showError(pushUser.error?.data?.zodError)}
-        // }
+       
         router.push("./Login")
 
         }
-        // catch(error){
-        //   console.log(error);
-        //   // showError(error)
-        //   window.location.reload();
-        //   return <>
-        //   <TransitionAlerts message={"dfgdbd"}/>
-        //   </>
-          
-        // }
+        
         catch (e) {
           
           if (e instanceof z.ZodError) {
@@ -76,22 +62,15 @@ export default function SignUp(){
             setError(errorMessage);
             console.log(errorMessage)
             // alert(errorMessage);
-            // window.location.reload();
-            // return<>
-            // <TransitionAlerts message={errorMessage} />
-            // </>
-            router.push("./SignUp")
+            // setTimeout
+            window.location.reload();
             
           } else {
             console.log('An unexpected error occurred');
 
+            }
+
           }
-          // setOpen(true);
-          // 
-        }
-        // finally{
-        //   router.push("./Login")
-        // }
         }
 
     return (
@@ -107,18 +86,20 @@ export default function SignUp(){
           overflow: 'hidden',
     }} >
      
-     {/* <div className=" mt-10 flex items-center justify-center bg-gray-100">
-      <Err message="This is a custom error message!" />
-    </div> */}
-   {error? (<div className=" mt-10 flex flex-col p-5 items-center justify-center">
-    {error.map((error, index) => (<TransitionAlerts key={index} message={error.message} />))}
-    </div>):(<div></div>)}
-    {/* {JSON.stringify(error)}
-    {console.log(error)} */}
-                {/* <h2 className="mb-4 text-2xl font-bold">Create New User</h2> */}
+      {typerror? (
+          <div className="flex flex-col">
+          {typerror.map((error, index) => (
+            
+            <TransitionAlerts key={index} message={error.message} index={index} />
+      ))}
+    </div>
+    ):(<div></div>)}
+   
                <center>
-                <div className=" flex flex-col justify-center align-middle mb-4 p-5 w-[35rem] h-[30rem] relative bg-opacity-70 backdrop-blur-md mt-20 space-y-6 bg-zinc-900 rounded-md shadow-xl	">
+                <div className=" flex flex-col justify-center align-middle mb-4 p-5 w-[35rem] h-[30rem] relative bg-opacity-70 backdrop-blur-md mt-20 space-y-6 bg-zinc-900 rounded-md shadow-xl">
+                 
                   <Typography variant="h6" className=" text-stone-300">Create User</Typography>
+                    
                     <div><input
                         className="mr-2 w-3/5 border border-gray-300 p-2 rounded-md"
                         placeholder="UserName"
@@ -159,11 +140,9 @@ export default function SignUp(){
                       Create User
                     </Button>
                     </div>
-                    </div>
-                    </center>
+                  </div>
+                </center>
               </div>
-        
-          
         )  
     }
 

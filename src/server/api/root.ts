@@ -6,7 +6,6 @@ import { makeBlog } from "./routers/cblog";
 import { comment } from "./routers/comment";
 
 export const appRouter = createTRPCRouter({
-  post: postRouter,
   exam: exampleStuff,
   auths: serverRouter,
   bcall: makeBlog

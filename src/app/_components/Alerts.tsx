@@ -1,44 +1,34 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Alert from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
-import Collapse from '@mui/material/Collapse';
 import Button from '@mui/material/Button';
-import CloseIcon from '@mui/icons-material/Close';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
-export default function TransitionAlerts({message}) {
+export default function TransitionAlerts({message, index}) {
   const [open, setOpen] = React.useState(true);
 
+  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   return (
-    <Box sx={{ width: '60%' }}>
-      <Collapse in={open}>
-        <Alert
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          }
-          sx={{mt: -3 , mb: -2 }}
-        >
-         {message}
-        </Alert>
-      </Collapse>
-      <Button
-        disabled={open}
-        variant="outlined"
-        onClick={() => {
-          setOpen(true);
-        }}
+    <div>
+      <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}
+      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      style={{ marginTop: index *60 }} 
       >
-        Re-open
-      </Button>
-    </Box>
+        <Alert
+          onClose={handleClose}
+          severity="error"
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {message}
+        </Alert>
+      </Snackbar>
+    </div>
   );
 }

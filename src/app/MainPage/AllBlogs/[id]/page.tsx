@@ -7,14 +7,11 @@ import { api } from "~/trpc/react"
 
 export default function() {
     const blogID = useParams()
-    // let lid = blogID ? blogID.id : 4;
-    // let blid = parseInt(lid)
 
     let lid = blogID ? blogID.id : 4;
     let blid = parseInt(lid)
 
     return<>
-            {/* {JSON.stringify(blid)} */}
             <SingleBlog id = {blid}/>
          </>
 }
