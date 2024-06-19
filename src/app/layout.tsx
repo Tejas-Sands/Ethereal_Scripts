@@ -25,7 +25,7 @@ export default function RootLayout({
         <html lang="en">
         <SessionP>
           <body className={`font-sans ${inter.variable}`}>
-          <div className="relative z-50 -mt-4 -ml-3 p-6 bg-zinc-900">
+          <div className="relative z-50 -mt-4 -ml-6 p-6 bg-zinc-900">
                 <Nav/>
               </div>
             <TRPCReactProvider cookies={cookies().toString()}>

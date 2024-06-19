@@ -1,15 +1,14 @@
 "use client"
 import { Button, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { api } from "~/trpc/react";
-import { showError } from "~/app/_components/Notifications";
 import TransitionAlerts from "~/app/_components/Alerts";
 import { authOptions } from "~/server/auth";
 import { z } from 'zod';
 
 const schema =z.object ({email: z.string().email(),
-  password: z.string().min(6 , "please check the length of your goddamn password"),
+  password: z.string().min(6 , "please check the length of your password"),
   name: z.string().min(5 , "Atleast five letters needed").max(23 , "big enough..."),
   image: z.string(),
 })
@@ -29,7 +28,6 @@ export default function SignUp(){
     const handleUser = async() => {
       
         try{
-
           schema.parse( {
             name: name,
             email: email,
@@ -49,10 +47,8 @@ export default function SignUp(){
           setEmail("");
           setPassword("");
           setImage("");
-
        
         router.push("./Login")
-
         }
         
         catch (e) {
@@ -61,17 +57,22 @@ export default function SignUp(){
             const errorMessage = e.errors;
             setError(errorMessage);
             console.log(errorMessage)
-            // alert(errorMessage);
-            // setTimeout
-            window.location.reload();
             
           } else {
-            console.log('An unexpected error occurred');
+            alert('An unexpected error occurred');
 
             }
-
           }
         }
+
+        useEffect(() => {
+          if (typerror) {
+            const timer = setTimeout(() => {
+              setError("");
+            }, 4000); 
+            return () => clearTimeout(timer); 
+          }
+        }, [typerror]);
 
     return (
      <div  style={{
@@ -89,12 +90,11 @@ export default function SignUp(){
       {typerror? (
           <div className="flex flex-col">
           {typerror.map((error, index) => (
-            
-            <TransitionAlerts key={index} message={error.message} index={index} />
-      ))}
-    </div>
-    ):(<div></div>)}
-   
+            <TransitionAlerts key={index} message={error.message} index={index} severity={"error"} />
+        ))}
+      </div>
+      ):(<div></div>)}
+
                <center>
                 <div className=" flex flex-col justify-center align-middle mb-4 p-5 w-[35rem] h-[30rem] relative bg-opacity-70 backdrop-blur-md mt-20 space-y-6 bg-zinc-900 rounded-md shadow-xl">
                  
@@ -121,16 +121,16 @@ export default function SignUp(){
                       placeholder="Password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      />
-                      </div>
+                        />
+                        </div>
                       
                     <div><input
                       className="mr-2 w-3/5 border border-gray-300 p-2 rounded-md"
                       placeholder="Url of display Picture"
                       value={image}
                       onChange={(e) => setImage(e.target.value)}
-                      />
-                    </div>
+                        />
+                      </div>
 
                     <div><Button
                       className="w-[21rem]"

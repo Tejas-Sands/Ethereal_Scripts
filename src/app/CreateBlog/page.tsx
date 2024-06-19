@@ -1,25 +1,70 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useState } from "react"
+import { useState , useEffect} from "react"
 import { api } from "~/trpc/react";
 import "../../styles/globals.css"
 import { Button } from '@mui/material';
+import { z } from 'zod';
+import TransitionAlerts from "~/app/_components/Alerts";
+import { getSession } from 'next-auth/react'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'; 
+import gsap from 'gsap';
+
+// gsap.registerPlugin(ScrollTrigger)
+
+const blogSchema = z.object({
+          Bname: z.string(),
+          article: z.string().min(500, "number of letters should be at least 500"),
+          image: z.string(),
+          imaget: z.optional(z.string()),
+          createdBy: z.string()
+        })
 
 export default function CreateBlog(){
 
-    const router = useRouter();
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const session = await getSession();
+      if (!session) {
+        router.replace('/User/Login');
+      } else {
+        setLoading(false);
+      }
+    };
+
+    checkSession();
+  }, [router]);
+
+  if (loading) {
+    return <p><b>Loading...</b></p>;
+  }
+
+    
 
     const [title, setTitle] = useState("");
     const [article, setArticle] = useState("");
     const [img, setImg] = useState("");
     const [image, setImage] = useState("");
     const [id, setId] = useState("");
+    const [typerror, setError] = useState('');
 
     const createB = api.bcall.blog.useMutation();
 
     const handleUser = async() => {
         try{
+
+          blogSchema.parse({
+                Bname: title,
+                article: article,
+                image: img,
+                imaget: image,
+                createdBy: id
+          })
+
           await createB.mutateAsync(
             {
                 Bname: title,
@@ -35,13 +80,23 @@ export default function CreateBlog(){
           setImage("");
           setId("");
 
-        }catch(error){
-          console.log(error);
-          window.location.reload();
-        }
-        finally{
           router.push("./")
+
+        }catch(e){
+          if (e instanceof z.ZodError) {
+            const errorMessage = e.errors;
+            setError(errorMessage);
+            console.log(errorMessage)
+            
+            // setTimeout
+            window.location.reload();
+            
+          } else {
+            console.log('An unexpected error occurred');
+
+            }
         }
+       
       }
     return (
             
@@ -56,6 +111,15 @@ export default function CreateBlog(){
                       backgroundPosition: 'center'
                 }} 
                 >
+
+            {typerror? (
+                      <div className="flex flex-col">
+                      {typerror.map((error, index) => (
+                        
+                        <TransitionAlerts key={index} message={error.message} index={index} />
+                  ))}
+                </div>
+                ):(<div></div>)}
               <center>
                   <div className=" relative flex flex-row justify-center mt-5  shadow-3xl bg-opacity-70  backdrop-blur-md bg-slate-600 w-[70rem] rounded-2xl ">
                       <div className=" w-3/5">

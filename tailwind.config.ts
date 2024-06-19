@@ -19,9 +19,14 @@ export default {
       '4xl': '2.441rem',
       '5xl': '3.052rem',
       '45xl': '16.5rem',
-      'zz': '12rem'
+      'zz': '12rem',
+      'xxl': '6rem',
+      "ll" : '4rem',
     },
     extend: {
+      screens: {
+        'xs': '300px', 
+      },
       fontFamily: {
          fantany: ["MedievalSharp"],
         fant: ["Kaushan Script"],

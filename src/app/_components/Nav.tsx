@@ -34,33 +34,34 @@ export default function Nav(){
   };
 
 
-
     return(
         <div className="relative z-50">
-        <div className=" flex justify-between fixed bg-slate-900 bg-opacity-70 shadow-md backdrop-blur-md w-[97rem] h-16 -mt-5 -ml-5 ">
-        <div className="flex space-x-4 mt-6 ml-5">
-        <div className="basis-7 font-bold text-blue-500"><Link href="/">Home</Link></div>
-        <div className="order-1 font-bold text-blue-500">About Us</div>
+            <div className=" flex flex-wrap justify-between fixed bg-slate-900 bg-opacity-70 shadow-md backdrop-blur-md w-full h-16 top-0 ">
+                      <div className="flex items-center space-x-4 -mt-10 ml-5">
+                            <div className="flex-shrink-0 basis-7 font-bold text-blue-500"><Link href="/">Home</Link></div>
+                            <div className="order-1 font-bold text-blue-500"><Link href="/About">About Us</Link></div>
+                      </div>
+               <div 
+                className="order-last p-5" >
+               
+                    {sessionData? (<div className="flex justify-items-end  p-5 -mt-8">                                
+                                    <div><img src={sessionData.user.image? (sessionData.user.image):(sessionData.user.name)}  className="w-8 h-8 rounded-full"></img></div> 
+                                    <div> {sessionData.user.name}</div> 
+                                    <div><Button variant="contained" onClick={() => void signOut()}>LogOut</Button></div></div>) 
+                                : (<div 
+                                className="flex justify-items-end  p-5 -mt-8 "
+                                >
+                                  <div><LoadingButton
+                                    onClick={handleClick}
+                                    loading={loading}
+                                  className=" rounded bg-blue-950  px-4 py-2 ">Login</LoadingButton></div>
+                                  <div><LoadingButton
+                                    onClick={handleClickReg}
+                                    loading={rloading}
+                                    className=" rounded bg-blue-950  px-4 py-2 ml-2">Register</LoadingButton></div></div>)}
+               </div>
+            </div>
         </div>
-        <div className="order-last p-5 mt-3">
-            {sessionData? (<div className="flex flex-row space-x-4 w-full mr-5">
-                <Button variant="contained" onClick={() => void signOut()}>LogOut</Button>
-                <div><img src={sessionData.user.image? (sessionData.user.image):(sessionData.user.name)}  className="w-8 h-8 rounded-full"></img></div> <div> {sessionData.user.name}</div> </div>) 
-                : (<div className="flex flex-row flex-wrap"><LoadingButton
-                    onClick={handleClick}
-                    loading={loading}
-                    
-                    // variant="outlined"
-                   className="-mt-5 rounded bg-blue-900 ">Login</LoadingButton> 
-                   <LoadingButton
-                    onClick={handleClickReg}
-                    loading={rloading}
-                    
-                    // variant="outlined"
-                    className="-mt-5 rounded bg-blue-900 ">Register</LoadingButton></div>)}</div>
-        </div>
-        </div>
-        // </div>
     )
 }
 

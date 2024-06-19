@@ -74,5 +74,4 @@ export default function AllBlogs(){
     <BlogList blogPosts={fetchAllBlogs} />
     </div>
     </>
-
 }

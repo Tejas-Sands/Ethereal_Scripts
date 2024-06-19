@@ -1,7 +1,8 @@
 body, html {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    overflow: auto;
+    height: 100%;
 }
 
 .scrolling-container {
@@ -9,11 +10,12 @@ body, html {
     overflow-y: scroll;
     perspective: 1px;
     perspective-origin: 0 0;
+    position: relative; 
 }
 
 .scrolling-content {
     transform-origin: 0 0;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;

@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
-export default function TransitionAlerts({message, index}) {
+export default function TransitionAlerts({message, index, severity}) {
   const [open, setOpen] = React.useState(true);
 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
@@ -22,7 +22,7 @@ export default function TransitionAlerts({message, index}) {
       >
         <Alert
           onClose={handleClose}
-          severity="error"
+          severity={severity}
           variant="filled"
           sx={{ width: '100%' }}
         >

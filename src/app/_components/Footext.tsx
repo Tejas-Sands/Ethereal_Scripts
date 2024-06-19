@@ -6,7 +6,7 @@ import Link from 'next/link';
 export default function FooterText(){
     return<>
 
-    <div className='bg-gradient-to-r from-zinc-700 to-slate-800 -mx-5 -mb-20 pb-6 pt-3'>
+    <div className=' mt-16 bg-gradient-to-r from-zinc-700 to-slate-800 -mx-5 -mb-20 pb-6 pt-3'>
     Copyright © 2024 ES Inc.
     <center >
         <b>Ethereal Scripts</b><pre/><br/>

@@ -11,6 +11,7 @@ import LoginPage from "./User/Login/page";
 import Nav from "./_components/Nav";
 import Ltext from "./_components/Maintext";
 import FooterText from "./_components/Footext";
+import Stuffs from "./_components/landingStuff";
 
 export default function Home(){
 
@@ -51,8 +52,10 @@ const handleUser = async() => {
                 
                   <Ltext/>
 
+                  <Stuffs/>
+
                   <br/>
-                  <h2 className="mb-4 text-2xl font-bold">gett 'em All</h2>
+                  {/* <h2 className="mb-4 text-2xl font-bold">gett 'em All</h2>
                   <button className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600" onClick={() =>fetchAllUsers.refetch()}> GET ALL USERS</button>
                   <div className="text- mb-4 mt-4 grid grid-cols-3 gap-4 font-bold">
                     <p>Id</p>
@@ -95,13 +98,11 @@ const handleUser = async() => {
                   <div>
                   <button className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-black"
                   onClick={() => void signIn()}>
-                    SignIn</button>
-
-                  <CreateBlogB/>
-            <div>
+                    SignIn</button> */}
+            {/* <div>
           </div>
         </div>
-      </div>
+      </div> */}
       <footer>
       <FooterText/>
       </footer>

@@ -3,18 +3,23 @@
 import { Button, Card } from '@mui/material';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { FormEvent } from 'react';
+import { FormEvent, useState, useEffect } from 'react';
 import GoogleIcon from '@mui/icons-material/Google';
+import TransitionAlerts from '~/app/_components/Alerts';
 
 export default function Form(){
 
 const imgO = "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
-
   const router = useRouter();
+
+  const [error, setError] = useState("")
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    
     e.preventDefault();
+
     const formData = new FormData(e.currentTarget);
+
     const response = await signIn('credentials', {
       email: formData.get('email'),
       password: formData.get('password'),
@@ -24,9 +29,21 @@ const imgO = "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&
     console.log({ response });
     if (!response?.error) {
       router.push('/');
-      router.refresh();
+    }
+    else{
+      setError(response.error)
     }
   };
+
+  useEffect(() => {
+    if (error) {
+      const timer = setTimeout(() => {
+        setError("");
+      }, 4000); 
+      return () => clearTimeout(timer); 
+    }
+  }, [error]);
+
   return (
     <div className=' flex justify-center ' style={{
       position: 'relative',
@@ -38,6 +55,8 @@ const imgO = "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&
           backgroundSize: 'cover',
           backgroundPosition: 'center'
     }}  >
+
+      {error && <TransitionAlerts message="User or Password is incorrect" severity="error" />}
 
           <img src={imgO} className=' h-[41rem]' style={{ position: 'relative',  }} />
           <div className='flex justify-center absolute inset-0 ' >
