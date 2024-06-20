@@ -75,6 +75,8 @@ export default function CreateBlog(){
           setImage("");
           setId("");
 
+          setError(null)
+
           router.push("./")
 
         }catch(e){
@@ -100,7 +102,7 @@ export default function CreateBlog(){
           return () => clearTimeout(timer); 
         }
       }, [typerror]);
-      
+
     return (
             
               <div className=' flex justify-center ' style={{
