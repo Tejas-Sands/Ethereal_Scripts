@@ -27,7 +27,7 @@ export default function CreateBlog(){
   const [img, setImg] = useState("");
   const [image, setImage] = useState("");
   const [id, setId] = useState("");
-  const [typerror, setError] = useState('');
+  const [typerror, setError] = useState<z.ZodIssue[] | null>(null);
 
   const createB = api.bcall.blog.useMutation();
 
@@ -82,9 +82,7 @@ export default function CreateBlog(){
             const errorMessage = e.errors;
             setError(errorMessage);
             console.log(errorMessage)
-            
-            // setTimeout
-            window.location.reload();
+           
             
           } else {
             console.log('An unexpected error occurred');
@@ -93,6 +91,16 @@ export default function CreateBlog(){
         }
        
       }
+
+      useEffect(() => {
+        if (typerror) {
+          const timer = setTimeout(() => {
+            setError("");
+          }, 4000); 
+          return () => clearTimeout(timer); 
+        }
+      }, [typerror]);
+      
     return (
             
               <div className=' flex justify-center ' style={{

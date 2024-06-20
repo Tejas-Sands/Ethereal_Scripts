@@ -10,7 +10,7 @@ import { z } from 'zod';
 const schema =z.object ({email: z.string().email(),
   password: z.string().min(6 , "please check the length of your password"),
   name: z.string().min(5 , "Atleast five letters needed").max(23 , "big enough..."),
-  image: z.string(),
+  image: z.string().url("URL is required"),
 })
 
 export default function SignUp(){
@@ -21,7 +21,7 @@ export default function SignUp(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [image, setImage] = useState("");
-    const [typerror, setError] = useState('');
+    const [typerror, setError] = useState<z.ZodIssue[] | null>(null);
 
     const pushUser = api.auths.signUp.useMutation();
 
