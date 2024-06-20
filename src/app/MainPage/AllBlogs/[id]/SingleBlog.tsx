@@ -10,7 +10,7 @@ import { Button , Card, Typography ,  } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 
 interface SingleBlogProps {
-    id: string;
+    id: number;
   }
 
 export default function SingleBlog(props: SingleBlogProps) {
