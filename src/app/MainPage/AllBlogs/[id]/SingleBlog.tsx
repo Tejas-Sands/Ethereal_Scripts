@@ -72,7 +72,9 @@ export default function SingleBlog(props: SingleBlogProps) {
 
     return<>
               
-           <img className="relative h-screen w-full z-0 blur-2xl " src={fetchIdBlog.data?.image}/>  
+              {fetchIdBlog.data?.image && (
+        <img className="relative h-screen w-full z-0 blur-2xl" src={fetchIdBlog.data.image} />
+      )}  
              <div className="relative ml-5 -mt-[20rem]  z-20"><img className="w-auto h-[15rem] sm:h-28 md:h-52 p-4 border-2 border-gray-500 border-solid  rounded-md " src={fetchIdBlog.data?.image}/></div>
                 <div className="relative flex flex-wrap z-10 p-5 bg-slate-400">
                     <br/><br/><br/><br/><br/><br/>
