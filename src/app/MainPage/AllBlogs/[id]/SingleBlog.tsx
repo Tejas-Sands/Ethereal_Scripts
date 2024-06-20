@@ -70,12 +70,14 @@ export default function SingleBlog(props: SingleBlogProps) {
             }
     }
 
+    const imageUrl = fetchIdBlog.data?.image ?? 'https://images.unsplash.com/photo-1591779051696-1c3fa1469a79?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+
     return<>
               
               {fetchIdBlog.data?.image && (
         <img className="relative h-screen w-full z-0 blur-2xl" src={fetchIdBlog.data.image} />
       )}  
-             <div className="relative ml-5 -mt-[20rem]  z-20"><img className="w-auto h-[15rem] sm:h-28 md:h-52 p-4 border-2 border-gray-500 border-solid  rounded-md " src={fetchIdBlog.data?.image}/></div>
+             <div className="relative ml-5 -mt-[20rem]  z-20"><img className="w-auto h-[15rem] sm:h-28 md:h-52 p-4 border-2 border-gray-500 border-solid  rounded-md " src={imageUrl}/></div>
                 <div className="relative flex flex-wrap z-10 p-5 bg-slate-400">
                     <br/><br/><br/><br/><br/><br/>
                         <Typography  variant="h3">{fetchIdBlog.data?.Bname}</Typography>                                            
@@ -97,7 +99,7 @@ export default function SingleBlog(props: SingleBlogProps) {
                                         </div>
                                                 {fetchIdBlog.data?.comments.map((coms) => (
                                                     <div className="p-5 rounded-xl bg-slate-600" key={coms.cid}>
-                                                        <img className="h-10 w-10 rounded-full" src={coms.image} /> 
+                                                        <img className="h-10 w-10 rounded-full" src={coms.image ?? 'https://images.unsplash.com/photo-1627283391728-701007067e7e?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'} /> 
                                                         <div className=" p-3 bg-slate-500 text-cyan-950"> {coms.name}: </div> 
                                                         {coms.content}
                                                     </div>
