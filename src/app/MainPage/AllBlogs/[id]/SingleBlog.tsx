@@ -9,7 +9,11 @@ import { getSession } from 'next-auth/react'
 import { Button , Card, Typography ,  } from "@mui/material";
 import LoadingButton from "@mui/lab/LoadingButton";
 
-export default function SingleBlog(props) {
+interface SingleBlogProps {
+    id: string;
+  }
+
+export default function SingleBlog(props: SingleBlogProps) {
  
     const {id} = props;
 
