@@ -57,7 +57,7 @@ export default function SingleBlog(props: SingleBlogProps) {
                     name : name,
                     content: content,
                     createdBy: cid,
-                    blogId: parseInt(id),
+                    blogId: id,
                     });
                 setImage("");
                 setName("")
