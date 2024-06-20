@@ -45,8 +45,8 @@ export default function Nav(){
                 className="order-last p-5" >
                
                     {sessionData? (<div className="flex justify-items-end  p-5 -mt-8">                                
-                                    <div><img src={sessionData.user.image? (sessionData.user.image):(sessionData.user.name)}  className="w-8 h-8 rounded-full"></img></div> 
-                                    <div> {sessionData.user.name}</div> 
+                                    <div><img src={sessionData.user.image? (sessionData.user.image):(sessionData.user.name)}  className="w-8 h-8 rounded-full p-2"></img></div> 
+                                    <div className=" text-neutral-400 mr-4"> {sessionData.user.name}</div> 
                                     <div><Button variant="contained" onClick={() => void signOut()}>LogOut</Button></div></div>) 
                                 : (<div 
                                 className="flex justify-items-end  p-5 -mt-8 "

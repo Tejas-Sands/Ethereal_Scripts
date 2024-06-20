@@ -91,11 +91,21 @@ export default function Ltext(){
       containerStyle
     }> */}
   <div className="relative overflow-hidden">
-  <img src={imgUrl} alt="Etherealism" className="w-[75vm] h-[70vm] border-7 border-black "  ref={imgSiz} />
+  <img 
+  src={imgUrl} 
+  alt="Etherealism" 
+  className="w-[75vm] h-[70vm] border-7 border-black "  
+  ref={imgSiz}
+   />
   <div className="absolute inset-0 flex h-full flex-col items-center justify-center" >
-  <div className=" font-fantany text-center  text-slate-500 xs:text-ll sm:text-xxl md:text-zz lg:text-45xl" style={{ textShadow: '5px 5px 8px black',}} ref={textRef}>Ethereal</div>
+  <div 
+      className=" font-fantany text-center  text-slate-500 text-kkl md:text-zz lg:text-45xl p-8" 
+      style={{ textShadow: '5px 5px 8px black',}} 
+      ref={textRef}>
+        Ethereal
+      </div>
   
-    <div className="drop-shadow-md hover:drop-shadow-2xl -mt-40 font-fantany text-center text-slate-500 flex justify-center xs:text-ll sm:text-xxl md:text-zz lg:text-45xl" style={{ textShadow: '5px 5px 8px black'}} ref={textreff}>Scripts</div>
+    <div className="drop-shadow-md hover:drop-shadow-2xl -mt-40 font-fantany text-center text-slate-500 flex justify-center text-kkl  md:text-zz lg:text-45xl" style={{ textShadow: '5px 5px 8px black'}} ref={textreff}>Scripts</div>
    
     <Button size="large" variant="outlined" ref={button} onClick={handleClick}>All Blogs</Button>
   </div>

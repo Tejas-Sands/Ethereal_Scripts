@@ -22,6 +22,8 @@ export default {
       'zz': '12rem',
       'xxl': '6rem',
       "ll" : '4rem',
+      "kl": '2rem',
+      "kkl": '8rem'
     },
     extend: {
       screens: {

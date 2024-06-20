@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import { stringify } from "querystring";
 import { getSession } from 'next-auth/react'
 import { Button , Card, Typography ,  } from "@mui/material";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 export default function SingleBlog(props) {
  
@@ -67,31 +68,31 @@ export default function SingleBlog(props) {
 
     return<>
               
-           <img className="relative h-full w-full z-0 blur-2xl " src={fetchIdBlog.data?.image}/>  
-             <div className="relative ml-5 -mt-[38rem]  z-20"><img className="w-auto h-[15rem] p-4 border-2 border-gray-500 border-solid  rounded-md " src={fetchIdBlog.data?.image}/></div>
-                <div className="relative flex flex-wrap z-10 p-5 pr-96 bg-slate-400">
+           <img className="relative h-screen w-full z-0 blur-2xl " src={fetchIdBlog.data?.image}/>  
+             <div className="relative ml-5 -mt-[20rem]  z-20"><img className="w-auto h-[15rem] sm:h-28 md:h-52 p-4 border-2 border-gray-500 border-solid  rounded-md " src={fetchIdBlog.data?.image}/></div>
+                <div className="relative flex flex-wrap z-10 p-5 bg-slate-400">
                     <br/><br/><br/><br/><br/><br/>
                         <Typography  variant="h3">{fetchIdBlog.data?.Bname}</Typography>                                            
                         <br/>
-                        <Typography variant="h6" className="flex flex-shrink flex-wrap">{fetchIdBlog.data?.article}</Typography>
+                    <Typography variant="h6" className="flex flex-wrap lg:text-2xl md:text-xl " style={{ whiteSpace: 'pre-line' }}>{fetchIdBlog.data?.article}</Typography>
                                 </div> 
                                     <div className="p-5 relative z-20 ">
-                                        <h2>Comments</h2>
+                                        <h2 className=" text-pretty">Comments</h2>
                                         <div>
-                                            <input className="rounded-lg bg-slate-800 p-2"
+                                            <input className="rounded-lg bg-slate-800 p-2 text-slate-400"
                                             placeholder=" your comment...."
                                             value={content}
                                             onChange={(e) => setContent(e.target.value)}
                                             />
-                                            <Button
+                                            <LoadingButton
                                                 onClick = {handleCreate}>
                                                 comment
-                                            </Button>
+                                            </LoadingButton>
                                         </div>
                                                 {fetchIdBlog.data?.comments.map((coms) => (
-                                                    <div className="p-3  rounded-xl bg-slate-600" key={coms.cid}>
+                                                    <div className="p-5 rounded-xl bg-slate-600" key={coms.cid}>
                                                         <img className="h-10 w-10 rounded-full" src={coms.image} /> 
-                                                        <div className=" p-3 bg-slate-500 text-cyan-950"> {coms.name} </div> 
+                                                        <div className=" p-3 bg-slate-500 text-cyan-950"> {coms.name}: </div> 
                                                         {coms.content}
                                                     </div>
                                                 ))}  

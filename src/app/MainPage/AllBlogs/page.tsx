@@ -41,9 +41,9 @@ import './style.css';
               }, [ index]);
 
                     return <div ref={blogsLoad} >
-                    
+                     <Link href={`AllBlogs/${blog.bid}`}>
                              <Card  key={blog.bid}
-                                        className="my-4   rounded border bg-slate-400 shadow w-[26rem] h-[20rem]" >
+                                        className="my-4  rounded border bg-slate-400 shadow w-[26rem] h-[20rem] hover:bg-slate-300" >
                                           <CardMedia
                                           component="img"
                                           image={blog.image}
@@ -51,16 +51,17 @@ import './style.css';
                                         />
                               
                                       <CardContent >
-                                          <Typography gutterBottom variant="h5" component="div">
+                                          <Typography gutterBottom variant="h6" component="div">
                                           {blog.Bname}
                                           </Typography>
                                       </CardContent>
-                                        
+{/*                                         
                                         <CardActions>
                                           <Link href={`AllBlogs/${blog.bid}`}><Button size="small">Check Out</Button></Link>
                                           <Button size="small">Share</Button>
-                                        </CardActions>
+                                        </CardActions> */}
                                   </Card>
+                                  </Link>
                               </div>
         }
 

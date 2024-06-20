@@ -8,10 +8,6 @@ import { Button } from '@mui/material';
 import { z } from 'zod';
 import TransitionAlerts from "~/app/_components/Alerts";
 import { getSession } from 'next-auth/react'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'; 
-import gsap from 'gsap';
-
-// gsap.registerPlugin(ScrollTrigger)
 
 const blogSchema = z.object({
           Bname: z.string(),
@@ -25,6 +21,15 @@ export default function CreateBlog(){
 
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+
+  const [title, setTitle] = useState("");
+  const [article, setArticle] = useState("");
+  const [img, setImg] = useState("");
+  const [image, setImage] = useState("");
+  const [id, setId] = useState("");
+  const [typerror, setError] = useState('');
+
+  const createB = api.bcall.blog.useMutation();
 
   useEffect(() => {
     const checkSession = async () => {
@@ -44,16 +49,6 @@ export default function CreateBlog(){
   }
 
     
-
-    const [title, setTitle] = useState("");
-    const [article, setArticle] = useState("");
-    const [img, setImg] = useState("");
-    const [image, setImage] = useState("");
-    const [id, setId] = useState("");
-    const [typerror, setError] = useState('');
-
-    const createB = api.bcall.blog.useMutation();
-
     const handleUser = async() => {
         try{
 
