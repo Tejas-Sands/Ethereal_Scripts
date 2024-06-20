@@ -75,8 +75,6 @@ export default function CreateBlog(){
           setImage("");
           setId("");
 
-          setError(null)
-
           router.push("./")
 
         }catch(e){
@@ -97,7 +95,7 @@ export default function CreateBlog(){
       useEffect(() => {
         if (typerror) {
           const timer = setTimeout(() => {
-            setError("");
+            setError(null);
           }, 4000); 
           return () => clearTimeout(timer); 
         }
