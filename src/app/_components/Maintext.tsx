@@ -16,10 +16,6 @@ export default function Ltext(){
   const [isClicked, setIsClicked] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
-  // const getResponsiveFontSize = () => {
-  //   return { fontSize: 'clamp(5rem, 5vw, 25rem)' };
-  // };
-
     const textRef = useRef<HTMLDivElement>(null);
     const textreff = useRef<HTMLDivElement>(null);
     const parareff = useRef<HTMLParagraphElement>(null);
@@ -87,9 +83,7 @@ export default function Ltext(){
     return <>
    
     <center>
-    {/* <div style={
-      containerStyle
-    }> */}
+
   <div className="relative overflow-hidden">
   <img 
   src={imgUrl} 
@@ -99,13 +93,13 @@ export default function Ltext(){
    />
   <div className="absolute inset-0 flex h-full flex-col items-center justify-center" >
   <div 
-      className=" font-fantany text-center  text-slate-500 text-kkl md:text-zz lg:text-45xl p-8" 
+      className=" font-fantany text-center  text-slate-500 text-xxl md:text-zz lg:text-45xl p-8" 
       style={{ textShadow: '5px 5px 8px black',}} 
       ref={textRef}>
         Ethereal
       </div>
   
-    <div className="drop-shadow-md hover:drop-shadow-2xl -mt-40 font-fantany text-center text-slate-500 flex justify-center text-kkl  md:text-zz lg:text-45xl" style={{ textShadow: '5px 5px 8px black'}} ref={textreff}>Scripts</div>
+    <div className="drop-shadow-md hover:drop-shadow-2xl -mt-40 font-fantany text-center text-slate-500 flex justify-center text-ll  md:text-zz lg:text-45xl" style={{ textShadow: '5px 5px 8px black'}} ref={textreff}>Scripts</div>
    
     <Button size="large" variant="outlined" ref={button} onClick={handleClick}>All Blogs</Button>
   </div>
