@@ -40,7 +40,7 @@ interface Blog {
 type BlogPostData = Blog;
 
 interface BlogPostsResponse {
-data: BlogPostData[]| undefined;;
+data: BlogPostData[]| undefined;
 }
 
 interface BlogListProps {
