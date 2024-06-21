@@ -34,7 +34,7 @@ interface Blog {
   createdAt: Date;
   updatedAt: Date;
   createdById: string;
-  comments: Comment[];
+  comments?: Comment[];
 }
 
 type BlogPostData = Blog;
