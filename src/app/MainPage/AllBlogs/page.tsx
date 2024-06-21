@@ -13,8 +13,36 @@ import { useRef , useState ,useEffect} from 'react';
 import gsap from 'gsap';
 import './style.css';
 
+interface Comment {
+  id: number;
+  author: string;
+  content: string;
+}
 
-        function BlogList({blogPosts}) {
+interface BlogPostData {
+  id: number;
+  bid: string;
+  Bname: string;
+  image: string;
+  content: string;
+  comments: Comment[];
+}
+
+interface BlogPostsResponse {
+  data: BlogPostData[];
+}
+
+interface BlogListProps {
+  blogPosts: BlogPostsResponse;
+}
+
+interface BlogPostProps {
+  blog: BlogPostData;
+  index: number;
+}
+
+
+        function BlogList({blogPosts}: BlogListProps) {
 
               return <>
               <div className="  p-5 flex flex-row flex-wrap justify-around">
@@ -27,9 +55,9 @@ import './style.css';
             }
 
 
-        function BlogPost({ blog , index }){
+        function BlogPost({ blog , index }: BlogPostProps){
 
-          const blogsLoad = useRef();
+          const blogsLoad = useRef<HTMLDivElement>(null);
 
             useEffect(() => {
             gsap.from(blogsLoad.current, {
@@ -55,11 +83,6 @@ import './style.css';
                                           {blog.Bname}
                                           </Typography>
                                       </CardContent>
-{/*                                         
-                                        <CardActions>
-                                          <Link href={`AllBlogs/${blog.bid}`}><Button size="small">Check Out</Button></Link>
-                                          <Button size="small">Share</Button>
-                                        </CardActions> */}
                                   </Card>
                                   </Link>
                               </div>
