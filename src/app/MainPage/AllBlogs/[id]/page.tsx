@@ -5,7 +5,7 @@ import SingleBlog from "./SingleBlog";
 import { useParams } from "next/navigation";
 import { api } from "~/trpc/react"
 
-export default function() {
+export default function Singular() {
     const blogID = useParams()
 
     let lid: string | string[] | undefined = blogID?.id ?? "4";
@@ -18,7 +18,7 @@ export default function() {
         lid = "4";
     }
 
-    let blid = parseInt(lid)
+    const blid = parseInt(lid)
 
     return<>
             <SingleBlog id = {blid}/>
