@@ -10,7 +10,12 @@ import { verify } from "argon2"
 import { db } from "~/server/db";
 import { env } from "~/env";
 import { Session } from "inspector";
-// import Email from "next-auth/providers/email";
+
+interface User {
+  password: string | null;
+  name: string;
+  email: string;
+}
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
