@@ -8,7 +8,7 @@ import { api } from "~/trpc/react"
 export default function() {
     const blogID = useParams()
 
-    let lid = blogID ? blogID.id : 4;
+    let lid = blogID && blogID.id? blogID.id : "4";
     let blid = parseInt(lid)
 
     return<>
