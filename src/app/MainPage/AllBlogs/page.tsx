@@ -85,7 +85,7 @@ interface BlogPostProps {
                                         className="my-4  rounded border bg-slate-400 shadow w-[26rem] h-[20rem] hover:bg-slate-300" >
                                           <CardMedia
                                           component="img"
-                                          image={blog.image}
+                                          image={blog.image ?? ""}
                                           className="h-[12rem]"
                                         />
                               
