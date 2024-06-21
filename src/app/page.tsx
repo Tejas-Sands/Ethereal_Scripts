@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import { api } from "~/trpc/react";
-import Someshhh from "./_components/someshit";
 import "../styles/globals.css"
 import { signIn, signOut, useSession } from "next-auth/react";
 import CreateBlogB from "./_components/toCreateB";                                                  
@@ -50,7 +49,7 @@ const handleUser = async() => {
             <div className="mb-8 -mt-7 p-5 bg-slate-900">
                 
                   <Ltext/>
-                  
+
                   <Stuffs/>
                   <br/>
 
