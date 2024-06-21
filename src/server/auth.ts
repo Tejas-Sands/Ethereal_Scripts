@@ -75,6 +75,9 @@ export const authOptions: NextAuthOptions = {
               },
             },
             async authorize(credentials) {
+
+              let user: User | null = null;
+              
               try {
                 const user = await db.user.findUnique({ where:{email: credentials?.email,}, });
 
