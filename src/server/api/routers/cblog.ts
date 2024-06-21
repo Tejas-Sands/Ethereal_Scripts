@@ -65,7 +65,7 @@ export const makeBlog = createTRPCRouter({
       const image = ctx.session.user.image || 'https://images.unsplash.com/photo-1531512073830-ba890ca4eba2?q=80&w=1958&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
         const result = await ctx.db.comments.create({
             data: { image: image ,
-                    name: ctx.session.user.name,
+                    name: ctx.session.user.name ?? 'Anonymous',
                     content: input.content,
                     createdBy: {connect: {id: ctx.session.user.id}} ,
                     blogId: {connect:{bid: input.blogId}}
