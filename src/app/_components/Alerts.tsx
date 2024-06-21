@@ -3,7 +3,13 @@ import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
 
-export default function TransitionAlerts({message, index, severity}) {
+interface TransitionAlertsProps {
+  message: string;
+  index: number;
+  severity: "error" | "warning" | "info" | "success";
+}
+
+export default function TransitionAlerts({message, index, severity}:TransitionAlertsProps) {
   const [open, setOpen] = React.useState(true);
 
   const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
