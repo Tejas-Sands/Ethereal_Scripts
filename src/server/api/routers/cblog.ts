@@ -31,7 +31,7 @@ export const makeBlog = createTRPCRouter({
           // showError("Invalid Input")
         // } 
       return {     
-        message: `${result.title} created successfully`
+        message: `${result.Bname} created successfully`
     }
   }),
     getAllBlog: publicProcedure.query(({ctx}) => {
