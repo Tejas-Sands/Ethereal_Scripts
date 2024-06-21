@@ -38,7 +38,7 @@ interface Blog {
 }
 
 interface BlogPostsResponse {
-  data: blogPost.data[];
+  data: blogPosts.data[];
 }
 
 interface BlogListProps {
