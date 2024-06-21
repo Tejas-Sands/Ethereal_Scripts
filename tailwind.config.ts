@@ -21,7 +21,7 @@ export default {
       '45xl': '16.5rem',
       'zz': '12rem',
       'xxl': '6rem',
-      "ll" : '4rem',
+      "ll" : '4.5rem',
       "kl": '2rem',
       "kkl": '8rem'
     },
