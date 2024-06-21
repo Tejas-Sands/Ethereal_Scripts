@@ -18,6 +18,7 @@ export const serverRouter = createTRPCRouter({
         });
         if (exists){
             throw new trpc.TRPCError({
+                code: 'BAD_REQUEST',
                 message: " user already exist"
             });
         }
