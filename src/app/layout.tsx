@@ -7,12 +7,6 @@ import SessionP from "./_components/provider";
 import { Session } from 'next-auth';
 import { getSession } from 'next-auth/react';
 
-
-interface LayoutProps {
-  children: React.ReactNode;
-  session: Session | null;
-}
-
   
 const inter = Inter({
   subsets: ["latin"],
@@ -25,7 +19,7 @@ export const metadata = {
   icons: [{ rel: "icon", url: "Ethereal Scripts.png" }],
 };
 
-export default function RootLayout({ children,session}: LayoutProps) {
+export default function RootLayout({ children,}: {children: React.ReactNode;}) {
       return (
         <html lang="en">
         <SessionP session={session}>
