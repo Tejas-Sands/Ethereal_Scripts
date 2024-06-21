@@ -7,12 +7,13 @@ import { Session } from 'next-auth';
 
 interface ClientSessionProviderProps {
   children: React.ReactNode;
-  session: Session | null;
+//   session: Session | null;
 }
 
-const ClientSessionProvider: React.FC<ClientSessionProviderProps> = ({ children, session }) => {
+const ClientSessionProvider: React.FC<ClientSessionProviderProps> = ({ children}) => {
+
   return (
-    <SessionProvider session={session}>
+    <SessionProvider >
       {children}
     </SessionProvider>
   );
