@@ -37,8 +37,10 @@ interface Blog {
   comments: Comment[];
 }
 
+type BlogPostData = Blog;
+
 interface BlogPostsResponse {
-  data: blogPosts.data[];
+data: BlogPostData[];
 }
 
 interface BlogListProps {
