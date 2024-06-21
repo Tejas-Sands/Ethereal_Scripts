@@ -59,7 +59,7 @@ interface BlogPostProps {
               <div className="  p-5 flex flex-row flex-wrap justify-around">
                   {blogPosts.data &&
                     blogPosts.data.map((blog, index) => (
-                    <BlogPost key={blog.id} blog={blog} index={index} />
+                    <BlogPost key={blog.bid} blog={blog} index={index} />
                   ))}
               </div>
               </>
