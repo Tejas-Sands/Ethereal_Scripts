@@ -28,7 +28,9 @@ export default function Ltext(){
 
     const handleClick = () => {
       setIsClicked(true);
-      gsap.to(imgSiz.current, { duration: 2, scale: 23 });
+      if (imgSiz.current) {
+        gsap.to(imgSiz.current, { duration: 2, scale: 23 });
+      }
       gsap.to(textRef.current, {
             opacity: 0,
             y: 20,
