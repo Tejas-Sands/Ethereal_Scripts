@@ -99,7 +99,7 @@ export default function Ltext(){
         Ethereal
       </div>
   
-    <div className="drop-shadow-md hover:drop-shadow-2xl font-fantany text-center text-slate-500 flex justify-center text-ll  md:text-zz lg:text-45xl lg:mt-0 md:-mt-2 sm:-mt-36" style={{ textShadow: '5px 5px 8px black'}} ref={textreff}>Scripts</div>
+    <div className="drop-shadow-md hover:drop-shadow-2xl font-fantany text-center text-slate-500 flex justify-center text-ll  md:text-zz lg:text-45xl lg:mt-0 md:-mt-2 -mt-20" style={{ textShadow: '5px 5px 8px black'}} ref={textreff}>Scripts</div>
    
     <Button size="large" variant="outlined" ref={button} onClick={handleClick}>All Blogs</Button>
   </div>
