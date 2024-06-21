@@ -86,7 +86,7 @@ export const authOptions: NextAuthOptions = {
 
                   if (match) {
                     console.log("Good Pass");
-                    delete user.password;
+                    delete (user as Partial<User>).password;
                     console.log(Session)
                     // foundUser["role"] = "Unverified Email";
                     return user;
