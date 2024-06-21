@@ -8,11 +8,16 @@ import { api } from "~/trpc/react"
 export default function() {
     const blogID = useParams()
 
-    let lid = blogID && blogID.id? blogID.id : "4";
+    let lid: string | string[] | undefined = blogID?.id ?? "4";
 
     if (Array.isArray(lid)) {
         lid = lid[0]; 
     }
+
+    if (lid === undefined) {
+        lid = "4";
+    }
+
     let blid = parseInt(lid)
 
     return<>
