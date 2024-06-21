@@ -68,7 +68,7 @@ export default function SignUp(){
         useEffect(() => {
           if (typerror) {
             const timer = setTimeout(() => {
-              setError("");
+              setError(null);
             }, 4000); 
             return () => clearTimeout(timer); 
           }
