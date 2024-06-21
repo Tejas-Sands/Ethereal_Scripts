@@ -93,7 +93,7 @@ export default function Ltext(){
    />
   <div className="absolute inset-0 flex h-full flex-col items-center justify-center" >
   <div 
-      className=" font-fantany text-center  text-slate-500 text-xxl md:text-zz lg:text-45xl lg:mt-0 md:-mt-2 -mt-10 p-8" 
+      className=" font-fantany text-center  text-slate-500 text-xxl md:text-zz lg:text-45xl lg:mt-0 md:-mt-2 -mt-2 p-8" 
       style={{ textShadow: '5px 5px 8px black',}} 
       ref={textRef}>
         Ethereal
