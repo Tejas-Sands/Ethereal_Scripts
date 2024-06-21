@@ -28,9 +28,9 @@ export default function Ltext(){
 
     const handleClick = () => {
       setIsClicked(true);
-      if (imgSiz.current) {
+      if (imgSiz.current && textRef.current && button.current && parareff.current) {
         gsap.to(imgSiz.current, { duration: 2, scale: 23 });
-      }
+      
       gsap.to(textRef.current, {
             opacity: 0,
             y: 20,
@@ -55,7 +55,7 @@ export default function Ltext(){
               duration: 1,
               delay: 0.1,
             });
-
+          }
       setIsLoading(true);
       setTimeout(() => {
         setIsLoading(false); // Reset loading state if needed
