@@ -119,7 +119,7 @@ export default function CreateBlog(){
                       <div className="flex flex-col">
                       {typerror.map((error, index) => (
                         
-                        <TransitionAlerts key={index} message={error.message} index={index} severity={error}/>
+                        <TransitionAlerts key={index} message={error.message} index={index} severity="error"/>
                   ))}
                 </div>
                 ):(<div></div>)}
