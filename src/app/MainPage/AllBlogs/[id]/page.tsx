@@ -9,6 +9,10 @@ export default function() {
     const blogID = useParams()
 
     let lid = blogID && blogID.id? blogID.id : "4";
+
+    if (Array.isArray(lid)) {
+        lid = lid[0]; 
+    }
     let blid = parseInt(lid)
 
     return<>
