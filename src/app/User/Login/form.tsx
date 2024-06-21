@@ -56,7 +56,7 @@ const imgO = "https://images.unsplash.com/photo-1472214103451-9374bd1c798e?q=80&
           backgroundPosition: 'center'
     }}  >
 
-      {error && <TransitionAlerts message="User or Password is incorrect" severity="error" />}
+      {error && <TransitionAlerts message="User or Password is incorrect" index={index} severity="error" />}
 
           <img src={imgO} className=' h-[41rem]' style={{ position: 'relative',  }} />
           <div className='flex justify-center absolute inset-0 ' >
