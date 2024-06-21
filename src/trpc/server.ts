@@ -43,7 +43,7 @@ export const api = createTRPCProxyClient<AppRouter>({
     () =>
       ({ op }) =>
         observable((observer) => {
-          createContext()
+          createTRPCContext()
             .then((ctx) => {
               return callProcedure({
                 procedures: appRouter._def.procedures,
