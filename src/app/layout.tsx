@@ -4,6 +4,15 @@ import { cookies } from "next/headers";
 import Nav from "./_components/Nav";
 import { TRPCReactProvider } from "~/trpc/react";
 import SessionP from "./_components/provider";
+import { Session } from 'next-auth';
+import { getSession } from 'next-auth/react';
+
+
+interface LayoutProps {
+  children: React.ReactNode;
+  session: Session | null;
+}
+
   
 const inter = Inter({
   subsets: ["latin"],
@@ -16,14 +25,10 @@ export const metadata = {
   icons: [{ rel: "icon", url: "Ethereal Scripts.png" }],
 };
 
-export default function RootLayout({
-      children,
-    }: {
-      children: React.ReactNode;
-    }) {
+export default function RootLayout({ children,session}: LayoutProps) {
       return (
         <html lang="en">
-        <SessionP>
+        <SessionP session={session}>
           <body className={`font-sans ${inter.variable}`}>
           <div className="relative z-50 -mt-4 -ml-6 p-6 bg-zinc-900">
                 <Nav/>

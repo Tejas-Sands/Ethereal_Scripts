@@ -1,15 +1,21 @@
-"use client"
+// components/ClientSessionProvider.tsx
+'use client';
 
-import { SessionProvider } from "next-auth/react";
-import { Session } from "next-auth";
+import { SessionProvider } from 'next-auth/react';
+import React from 'react';
+import { Session } from 'next-auth';
 
-interface SessionPProps {
-    children: React.ReactNode;
-    session: Session | null;
-  }  
-
-export default function SessionP({children, session}: SessionPProps){
-    return <>
-    <SessionProvider session={session}>{children}</SessionProvider>
-    </>
+interface ClientSessionProviderProps {
+  children: React.ReactNode;
+  session: Session | null;
 }
+
+const ClientSessionProvider: React.FC<ClientSessionProviderProps> = ({ children, session }) => {
+  return (
+    <SessionProvider session={session}>
+      {children}
+    </SessionProvider>
+  );
+};
+
+export default ClientSessionProvider;

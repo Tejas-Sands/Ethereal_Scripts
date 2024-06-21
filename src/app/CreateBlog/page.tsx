@@ -44,6 +44,16 @@ export default function CreateBlog(){
     checkSession();
   }, [router]);
 
+  useEffect(() => {
+    if (typerror) {
+      const timer = setTimeout(() => {
+        setError(null);
+      }, 4000); 
+      return () => clearTimeout(timer); 
+    }
+  }, [typerror]);
+
+
   if (loading) {
     return <p><b>Loading...</b></p>;
   }
@@ -92,15 +102,7 @@ export default function CreateBlog(){
        
       }
 
-      useEffect(() => {
-        if (typerror) {
-          const timer = setTimeout(() => {
-            setError(null);
-          }, 4000); 
-          return () => clearTimeout(timer); 
-        }
-      }, [typerror]);
-
+      
     return (
             
               <div className=' flex justify-center ' style={{
