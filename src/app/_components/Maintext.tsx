@@ -22,9 +22,9 @@ export default function Ltext(){
 
     const textRef = useRef<HTMLDivElement>(null);
     const textreff = useRef<HTMLDivElement>(null);
-    const parareff = useRef<HTMLDivElement>(null);
-    const imgSiz = useRef<HTMLButtonElement>(null);
-    const button = useRef<HTMLParagraphElement>(null);
+    const parareff = useRef<HTMLParagraphElement>(null);
+    const imgSiz = useRef<HTMLDivElement>(null);
+    const button = useRef<HTMLButtonElement>(null);
 
     const handleClick = () => {
       setIsClicked(true);
