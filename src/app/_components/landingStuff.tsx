@@ -7,11 +7,11 @@ gsap.registerPlugin(ScrollTrigger)
 
 export default function Stuffs(){
 
-    const imgref = useRef()
-    const textr = useRef()
-    const imgx = useRef()
-    const botton = useRef()
-    const textl = useRef()
+    const imgref = useRef<HTMLImageElement>(null);
+    const textr = useRef<HTMLDivElement>(null);
+    const imgx = useRef<HTMLImageElement>(null);
+    const botton = useRef<HTMLButtonElement>(null);
+    const textl = useRef<HTMLDivElement>(null);
 
     gsap.fromTo(imgx.current, {
         opacity: 0,
