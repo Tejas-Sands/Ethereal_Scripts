@@ -22,7 +22,6 @@ interface Comment {
   updatedAt: Date;
   blogId: number;
   blid: number;
-  createdBy: User;
   createdById: string;
 }
 
@@ -34,7 +33,6 @@ interface Blog {
   imaget: string | null;
   createdAt: Date;
   updatedAt: Date;
-  createdBy: User;
   createdById: string;
   comments: Comment[];
 }
