@@ -20,17 +20,15 @@ export default function Ltext(){
   //   return { fontSize: 'clamp(5rem, 5vw, 25rem)' };
   // };
 
-    const textRef = useRef();
-    const textreff = useRef();
-    const parareff = useRef();
-    const imgSiz = useRef();
-    const button = useRef();
+    const textRef = useRef<HTMLDivElement>(null);
+    const textreff = useRef<HTMLDivElement>(null);
+    const parareff = useRef<HTMLDivElement>(null);
+    const imgSiz = useRef<HTMLButtonElement>(null);
+    const button = useRef<HTMLParagraphElement>(null);
 
     const handleClick = () => {
       setIsClicked(true);
-      if (imgSiz.current && textRef.current && button.current && parareff.current) {
-        gsap.to(imgSiz.current, { duration: 2, scale: 23 });
-      
+      gsap.to(imgSiz.current, { duration: 2, scale: 23 });
       gsap.to(textRef.current, {
             opacity: 0,
             y: 20,
@@ -55,7 +53,7 @@ export default function Ltext(){
               duration: 1,
               delay: 0.1,
             });
-          }
+
       setIsLoading(true);
       setTimeout(() => {
         setIsLoading(false); // Reset loading state if needed
