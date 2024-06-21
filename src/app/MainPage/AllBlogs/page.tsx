@@ -14,17 +14,28 @@ import gsap from 'gsap';
 import './style.css';
 
 interface Comment {
-  id: number;
-  author: string;
+  cid: number;
+  name: string;
   content: string;
+  image: string;
+  createdAt: Date;
+  updatedAt: Date;
+  blogId: number;
+  blid: number;
+  createdBy: User;
+  createdById: string;
 }
 
-interface BlogPostData {
-  id: number;
-  bid: string;
+interface Blog {
+  bid: number;
   Bname: string;
-  image: string;
-  content: string;
+  article: string;
+  image: string | null;
+  imaget: string | null;
+  createdAt: Date;
+  updatedAt: Date;
+  createdBy: User;
+  createdById: string;
   comments: Comment[];
 }
 
