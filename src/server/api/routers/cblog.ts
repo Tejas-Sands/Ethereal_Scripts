@@ -23,7 +23,7 @@ export const makeBlog = createTRPCRouter({
         data: { Bname:input.Bname,
                 article:input.article,
                 image:input.image,
-                imaget:input.image2,
+                imaget:input.imaget,
                 createdBy: {connect: {id: ctx.session.user.id}},
                 },
         }); 
