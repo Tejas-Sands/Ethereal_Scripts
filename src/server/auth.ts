@@ -75,6 +75,11 @@ export const authOptions: NextAuthOptions = {
 
                 if (user) {
                   console.log("User Exists");
+
+                  if (credentials?.password == null || user.password == null) {
+                    throw new Error('Password is missing');
+                  }
+                  
                   const match = await verify(
                     user.password,credentials.password
                   );
