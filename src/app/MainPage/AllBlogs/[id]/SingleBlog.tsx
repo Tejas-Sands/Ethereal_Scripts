@@ -43,9 +43,12 @@ export default function SingleBlog(props: SingleBlogProps) {
 
     const handleCreate = async () => {
 
-    
+      setLoading(true);
+      setTimeout(() => {
+         setLoading(false);
+       }, 2500);
+
     checkSession();
- 
 
   if (loading) {
     return <p><b>Loading...</b></p>;
@@ -93,7 +96,8 @@ export default function SingleBlog(props: SingleBlogProps) {
                                             onChange={(e) => setContent(e.target.value)}
                                             />
                                             <LoadingButton
-                                                onClick = {handleCreate}>
+                                                onClick = {handleCreate}
+                                                loading ={isLoading}>
                                                 comment
                                             </LoadingButton>
                                         </div>
